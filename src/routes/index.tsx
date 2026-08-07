@@ -59,8 +59,8 @@ const structure = [
   { icon: Headphones, label: "Podcast" },
   { icon: Video, label: "Videocast" },
   { icon: Monitor, label: "Teleprompter" },
-  { icon: Scissors, label: "Ilhas de Edição" },
-  { icon: Users, label: "Equipe Técnica Especializada" },
+  { icon: Scissors, label: "Ilhas de edição" },
+  { icon: Users, label: "Equipe técnica especializada" },
 ];
 
 const reasons = [
@@ -74,16 +74,16 @@ const reasons = [
 ];
 
 const segments = [
-  { icon: Building2, label: "Empresas", desc: "Produções corporativas, institucionais e comerciais de alto impacto visual e estratégico." },
-  { icon: Landmark, label: "Prefeituras", desc: "Comunicação pública e prestação de contas com linguagem acessível." },
-  { icon: Landmark, label: "Câmaras Municipais", desc: "Sessões, debates e transparência com qualidade broadcast." },
-  { icon: Factory, label: "Indústrias", desc: "Vídeos técnicos, institucionais e normativas de segurança (NRs)." },
-  { icon: Store, label: "Comércio", desc: "Conteúdo digital de conversão e campanhas promocionais." },
-  { icon: Vote, label: "Campanhas Políticas", desc: "Estratégia, roteiro e captação eleitoral para TV e meio digital." },
-  { icon: PartyPopper, label: "Eventos", desc: "Cobertura de ponta a ponta, transmissões ao vivo e aftermovies." },
-  { icon: GraduationCap, label: "Instituições", desc: "Documentários e conteúdos educacionais de credibilidade." },
-  { icon: Users, label: "Associações", desc: "Histórias de engajamento social, valorização e impacto." },
-  { icon: Mic, label: "Podcasts", desc: "Estrutura completa para gravação, edição e streaming de videocasts profissionais." },
+  { icon: Building2, label: "Empresas", desc: "" },
+  { icon: Landmark, label: "Prefeituras", desc: "" },
+  { icon: Landmark, label: "Câmaras Municipais", desc: "" },
+  { icon: Factory, label: "Indústrias", desc: "" },
+  { icon: Store, label: "Comércio", desc: "" },
+  { icon: Vote, label: "Campanhas Políticas", desc: "" },
+  { icon: PartyPopper, label: "Eventos", desc: "" },
+  { icon: GraduationCap, label: "Instituições", desc: "" },
+  { icon: Users, label: "Associações", desc: "" },
+  { icon: Mic, label: "Podcasts", desc: "" },
 ];
 
 const programs = [
@@ -476,10 +476,8 @@ function Index() {
       <Section id="servicos" className="border-t border-border">
         <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-6 mb-16 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start">
-            <Eyebrow>Expertise</Eyebrow>
-            <h2 className="text-4xl md:text-5xl font-bold">Precisão em cada frame.</h2>
+            <h2 className="text-4xl md:text-5xl font-bold">Nossos Serviços</h2>
           </div>
-          <p className="text-muted-foreground max-w-md text-lg">Um portfólio completo de serviços audiovisuais, executados sem margem para o comum.</p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((s, i) => (
@@ -508,13 +506,9 @@ function Index() {
         <div className="absolute inset-0 bg-radial-glow opacity-40 pointer-events-none" />
         <div className="relative grid lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-5 text-center lg:text-left flex flex-col items-center lg:items-start">
-            <Eyebrow>Infraestrutura</Eyebrow>
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
-              O poder do broadcast à sua disposição.
+            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-8">
+              Nossa Estrutura
             </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-              Estúdios imersivos, unidades móveis e captação 4K. Estrutura absoluta para produções que exigem excelência técnica inquestionável.
-            </p>
             <div className="grid grid-cols-2 gap-4">
               {structure.map((s, i) => (
                 <Reveal key={s.label} delay={i * 50}>
@@ -548,10 +542,8 @@ function Index() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-12">
             <div className="lg:col-span-5 text-center lg:text-left flex flex-col items-center lg:items-start">
-              <Eyebrow>Por que a RTV?</Eyebrow>
               <h2 className="text-4xl md:text-5xl font-bold leading-tight">
-                O que faz a diferença
-                <span className="block text-gradient">em cada projeto.</span>
+                Por que escolher a RTV?
               </h2>
             </div>
             <div className="lg:col-span-7 grid sm:grid-cols-2 gap-3">
@@ -577,11 +569,7 @@ function Index() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
         
         <div className="text-center mb-16 relative z-10">
-          <Eyebrow>Segmentos que Atendemos</Eyebrow>
-          <h2 className="text-4xl md:text-5xl font-bold">Do público ao privado.</h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Soluções audiovisuais sob medida para diferentes mercados, entregando a mesma excelência em todos eles.
-          </p>
+          <h2 className="text-4xl md:text-5xl font-bold">Segmentos que Atendemos</h2>
         </div>
         
         <div className="flex flex-wrap justify-center gap-4 md:gap-5 max-w-6xl mx-auto relative z-10">
@@ -611,8 +599,7 @@ function Index() {
       {/* Programas */}
       <Section className="border-t border-border">
         <div className="mb-12">
-          <Eyebrow>Nossos Programas</Eyebrow>
-          <h2 className="text-4xl md:text-5xl font-bold">Conteúdo Original.</h2>
+          <h2 className="text-4xl md:text-5xl font-bold">Nossos Programas</h2>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
           {programs.map((p) => (
@@ -637,11 +624,7 @@ function Index() {
       <Section id="cases" className="border-t border-border overflow-hidden pb-16">
         <div className="flex items-end justify-between flex-wrap gap-6 mb-16 text-center w-full">
           <div className="w-full">
-            <Eyebrow>Cases</Eyebrow>
-            <h2 className="text-4xl md:text-5xl font-bold">Produções em Destaque.</h2>
-            <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-              Projetos que entregam resultados reais e elevam o patamar visual da sua marca.
-            </p>
+            <h2 className="text-4xl md:text-5xl font-bold">Cases</h2>
           </div>
         </div>
         
@@ -701,8 +684,7 @@ function Index() {
       {/* Processo */}
       <Section id="processo" className="border-t border-border">
         <div className="mb-20 text-center">
-          <Eyebrow>Método</Eyebrow>
-          <h2 className="text-4xl md:text-5xl font-bold">Cinco etapas. Zero fricção.</h2>
+          <h2 className="text-4xl md:text-5xl font-bold">Nosso Processo</h2>
         </div>
         <div className="grid md:grid-cols-5 gap-8 relative">
           <div className="hidden md:block absolute top-7 left-[10%] right-[10%] h-[2px] bg-border overflow-hidden">
@@ -732,8 +714,7 @@ function Index() {
       {/* Depoimentos */}
       <section className="pt-24 border-t border-border overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
-          <Eyebrow>Reconhecimento</Eyebrow>
-          <h2 className="text-4xl md:text-5xl font-bold">Quem assina embaixo.</h2>
+          <h2 className="text-4xl md:text-5xl font-bold">Depoimentos</h2>
         </div>
         
         <div className="w-full relative overflow-hidden group/testimonials" style={{ cursor: 'grab' }}>
