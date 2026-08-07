@@ -31,5 +31,5 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./dist/client/ # Pasta onde fica o build final no TanStack Start
+          local-dir: ./dist/ # Pasta do build estático
           server-dir: /public_html/ # Mude se o seu site não ficar na raiz
