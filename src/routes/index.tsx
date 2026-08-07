@@ -41,10 +41,10 @@ export const Route = createFileRoute("/")({
 });
 
 const services = [
-  { icon: Video, title: "Produção de Vídeos", desc: "Institucionais, comerciais, campanhas, documentários e conteúdo para redes sociais." },
+  { icon: Video, title: "Produção de Vídeos", desc: "Institucionais, comerciais, campanhas, documentários e vídeos para redes sociais." },
   { icon: Radio, title: "Transmissões ao Vivo", desc: "Lives corporativas, eventos, podcasts, seminários, esportes e programas ao vivo." },
-  { icon: Mic, title: "Estúdios Profissionais", desc: "Estrutura completa para podcasts, videocasts, programas de TV e conteúdos digitais." },
-  { icon: Tv, title: "Produção para TV", desc: "Programas, reportagens, entrevistas e conteúdos jornalísticos." },
+  { icon: Mic, title: "Estúdios Profissionais", desc: "Estrutura completa para gravações de podcasts, videocasts, programas de TV e conteúdos digitais." },
+  { icon: Tv, title: "Produção para TV", desc: "Produção de programas, reportagens, entrevistas e conteúdos jornalísticos." },
   { icon: Megaphone, title: "Comunicação Política", desc: "Especialistas em campanhas eleitorais, mandatos e comunicação pública." },
   { icon: Camera, title: "Cobertura de Eventos", desc: "Captação multicâmera, transmissão simultânea e produção completa." },
 ];
@@ -98,8 +98,8 @@ const cases = [
   { title: "Câmara Municipal de Mogi das Cruzes", desc: "Produção e operação da TV Câmara.", img: liveEvent, tag: "Governo" },
   { title: "Mogi Basquete", desc: "Transmissões oficiais e produção audiovisual.", img: droneEvent, tag: "Esportes" },
   { title: "Festa do Divino", desc: "Cobertura ao vivo e transmissão especial.", img: mobileUnit, tag: "Cultura" },
-  { title: "Eventos Corporativos", desc: "Soluções corporativas customizadas e integradas.", img: podcastStudio, tag: "Corporativo" },
-  { title: "Campanhas Eleitorais", desc: "Estratégia, captação e pós-produção política de alto desempenho.", img: heroStudio, tag: "Político" },
+  { title: "Eventos Corporativos", desc: "", img: podcastStudio, tag: "Corporativo" },
+  { title: "Campanhas Eleitorais", desc: "", img: heroStudio, tag: "Político" },
 ];
 
 const process = [
