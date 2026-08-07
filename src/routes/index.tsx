@@ -359,34 +359,26 @@ function Index() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] font-bold leading-[1.1] font-display text-white"
+            className="text-[2.5rem] sm:text-[3.5rem] md:text-[4.2rem] lg:text-[4.5rem] font-bold leading-[1.1] font-display text-white"
           >
-            Impacto Audiovisual.
+            Produções Audiovisuais que Conectam
           </motion.h1>
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] font-bold leading-[1.1] mb-4 font-display text-white/90"
+            className="text-[2.5rem] sm:text-[3.5rem] md:text-[4.2rem] lg:text-[4.5rem] font-bold leading-[1.1] mb-6 font-display text-white/90"
           >
-            Padrão Broadcast.
+            Marcas, Pessoas e Resultados.
           </motion.h1>
           
           <motion.p 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-base md:text-lg max-w-xl mb-1 font-light text-white/80"
+            className="text-base md:text-lg max-w-2xl mb-8 font-light text-white/80"
           >
-            Soluções audiovisuais premium para marcas exigentes.
-          </motion.p>
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-base md:text-lg max-w-xl mb-8 font-light text-white/80"
-          >
-            Da captação cinematográfica à transmissão ao vivo imersiva.
+            A RTV Filmes desenvolve soluções audiovisuais completas para empresas, órgãos públicos, campanhas políticas e eventos. Da criação à transmissão ao vivo, entregamos qualidade, inovação e experiência em cada projeto.
           </motion.p>
           
           <div className="flex flex-wrap justify-center items-center gap-4">
@@ -394,7 +386,7 @@ function Index() {
               Solicitar orçamento
             </a>
             <a href="#servicos" className="bg-white/5 border border-white/20 text-white font-medium px-8 py-4 cursor-pointer hover:bg-white/15 hover:border-white/40 rounded-full text-sm transition-all duration-300 backdrop-blur-md">
-              Nossos serviços
+              Conheça nossos serviços
             </a>
           </div>
         </div>
@@ -442,7 +434,7 @@ function Index() {
           <div className="lg:col-span-5 lg:col-start-1 text-center lg:text-left flex flex-col items-center lg:items-start">
             <Eyebrow>Quem Somos</Eyebrow>
             <h2 className="text-4xl md:text-5xl font-bold leading-tight">
-              20 Anos de Excelência. Sem Concessões.
+              Mais de duas décadas produzindo conteúdo de qualidade.
             </h2>
           </div>
 
@@ -467,13 +459,13 @@ function Index() {
 
           <div className="lg:col-span-5 lg:col-start-1 space-y-6 text-muted-foreground text-lg leading-relaxed pt-2 lg:pt-0">
             <p>
-              A RTV Filmes é uma agência e produtora especializada em transformar visões estratégicas em projetos de altíssimo impacto visual.
+              A RTV Filmes é uma produtora audiovisual especializada em transformar ideias em projetos de alto impacto.
             </p>
             <p>
-              Estrutura cinematográfica, equipe de elite e tecnologia state-of-the-art. Atendemos marcas, instituições e campanhas que não aceitam o mediano.
+              Com estrutura própria, equipe especializada e equipamentos profissionais, atendemos empresas, órgãos públicos, campanhas eleitorais, eventos e emissoras de televisão.
             </p>
             <p className="font-medium text-foreground/90">
-              Nosso compromisso: Execução impecável. Resultados absolutos.
+              Nosso compromisso é entregar soluções completas, aliando criatividade, tecnologia e eficiência para conectar sua marca em todas as telas.
             </p>
           </div>
 
@@ -827,12 +819,12 @@ function Index() {
       <section id="contato" className="border-t border-border relative overflow-hidden">
         <div className="absolute inset-0 bg-radial-glow opacity-60" />
         <div className="max-w-5xl mx-auto px-6 py-32 relative text-center">
-          <Eyebrow>Próximo Passo</Eyebrow>
+          <Eyebrow>Chamada Final</Eyebrow>
           <h2 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
-            Eleve o nível da sua <span className="text-gradient">produção.</span>
+            Vamos produzir seu <span className="text-gradient">próximo projeto?</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
-            Nossa equipe de especialistas está pronta para transformar sua visão estratégica em uma obra audiovisual de alto impacto.
+            Nossa equipe está pronta para transformar sua ideia em uma produção audiovisual de alto impacto.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <motion.a 
@@ -841,7 +833,7 @@ function Index() {
               href="https://wa.me/5511950257273" 
               className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-bold px-10 py-5 rounded-full hover:bg-primary/90 transition-colors shadow-glow"
             >
-              Iniciar Projeto <ArrowRight className="w-5 h-5" />
+              Solicitar orçamento <ArrowRight className="w-5 h-5" />
             </motion.a>
             <motion.a 
               whileHover={{ scale: 1.05 }}
@@ -863,7 +855,7 @@ function Index() {
             <div className="md:col-span-2">
               <img src={rtvLogo} alt="RTV Filmes" className="h-10 w-auto mb-4" />
               <p className="text-muted-foreground text-sm max-w-md">
-                Agência e produtora audiovisual. Vídeos, transmissões ao vivo, estúdios e comunicação estratégica para marcas que exigem o melhor.
+                Produções Audiovisuais que Conectam Marcas, Pessoas e Resultados.
               </p>
             </div>
             <div>
