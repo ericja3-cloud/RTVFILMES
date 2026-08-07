@@ -32,4 +32,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/ # Pasta do build estático
-          server-dir: /public_html/ # Mude se o seu site não ficar na raiz
+          server-dir: /public_html/teste/ # Mude se o seu site não ficar na raiz
