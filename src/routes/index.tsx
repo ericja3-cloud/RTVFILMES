@@ -23,6 +23,8 @@ import podcastStudio from "@/assets/RTV INST 23-26 FRAMES/Comp RTV FILMES INST60
 import droneEvent from "@/assets/RTV INST 23-26 FRAMES/Comp RTV FILMES INST60 4K p frames (0-00-43-01).jpg";
 import liveEvent from "@/assets/RTV INST 23-26 FRAMES/Comp RTV FILMES INST60 4K p frames (0-00-56-01).jpg";
 import rtvLogo from "@/assets/rtv-logo.png";
+import estudiosLogo from "@/assets/estudios.png";
+import estruturaBg from "@/assets/IMG_3458.PNG";
 import { useEffect, useRef, useState } from "react";
 
 const instagramPosts = [
@@ -45,21 +47,18 @@ const services = [
   { icon: Radio, title: "Transmissões ao Vivo", desc: "Lives corporativas, eventos, podcasts, seminários, esportes e programas ao vivo." },
   { icon: Mic, title: "Estúdios Profissionais", desc: "Estrutura completa para gravações de podcasts, videocasts, programas de TV e conteúdos digitais." },
   { icon: Tv, title: "Produção para TV", desc: "Produção de programas, reportagens, entrevistas e conteúdos jornalísticos." },
-  { icon: Megaphone, title: "Comunicação Política", desc: "Especialistas em campanhas eleitorais, mandatos e comunicação pública." },
+  { icon: Megaphone, title: "Campanha Política", desc: "Especialistas em campanhas eleitorais, mandatos e comunicação pública." },
   { icon: Camera, title: "Cobertura de Eventos", desc: "Captação multicâmera, transmissão simultânea e produção completa." },
 ];
 
 const structure = [
   { icon: Mic, label: "3 Estúdios Profissionais" },
   { icon: Wrench, label: "Unidade Móvel de Produção" },
-  { icon: Camera, label: "Equipamentos 4K" },
   { icon: Sun, label: "Iluminação Profissional" },
   { icon: Plane, label: "Drone" },
   { icon: Radio, label: "Streaming Multiplataforma" },
   { icon: Headphones, label: "Podcast" },
   { icon: Video, label: "Videocast" },
-  { icon: Monitor, label: "Teleprompter" },
-  { icon: Scissors, label: "Ilhas de edição" },
   { icon: Users, label: "Equipe técnica especializada" },
 ];
 
@@ -78,11 +77,9 @@ const segments = [
   { icon: Landmark, label: "Prefeituras", desc: "" },
   { icon: Landmark, label: "Câmaras Municipais", desc: "" },
   { icon: Factory, label: "Indústrias", desc: "" },
-  { icon: Store, label: "Comércio", desc: "" },
   { icon: Vote, label: "Campanhas Políticas", desc: "" },
   { icon: PartyPopper, label: "Eventos", desc: "" },
   { icon: GraduationCap, label: "Instituições", desc: "" },
-  { icon: Users, label: "Associações", desc: "" },
   { icon: Mic, label: "Podcasts", desc: "" },
 ];
 
@@ -502,66 +499,37 @@ function Index() {
       </Section>
 
       {/* Estrutura */}
-      <Section id="estrutura" className="border-t border-border relative overflow-hidden">
+      <Section id="estrutura" className="border-t border-border relative overflow-hidden pb-12">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30" 
+          style={{ backgroundImage: `url(${estruturaBg})` }} 
+        />
+        <div className="absolute inset-0 bg-background/80 backdrop-blur-[2px] pointer-events-none" />
         <div className="absolute inset-0 bg-radial-glow opacity-40 pointer-events-none" />
-        <div className="relative grid lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-5 text-center lg:text-left flex flex-col items-center lg:items-start">
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-8">
-              Nossa Estrutura
-            </h2>
-            <div className="grid grid-cols-2 gap-4">
-              {structure.map((s, i) => (
-                <Reveal key={s.label} delay={i * 50}>
-                  <div className="flex items-center gap-3 p-4 rounded-xl bg-card/40 border border-border/50 backdrop-blur-sm hover:bg-card/80 transition-colors">
-                    <s.icon className="w-5 h-5 text-primary shrink-0" />
-                    <span className="text-sm font-medium text-foreground/90">{s.label}</span>
+
+        <div className="relative max-w-5xl mx-auto text-center flex flex-col items-center">
+          <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-12">
+            Nossa Estrutura
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6 w-full">
+            {structure.map((s, i) => (
+              <Reveal key={s.label} delay={i * 50}>
+                <div className="flex flex-col items-center text-center gap-3 p-6 rounded-2xl bg-card/40 border border-border/50 backdrop-blur-sm hover:bg-card/80 transition-all hover:-translate-y-1 h-full shadow-sm">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-1">
+                    <s.icon className="w-6 h-6 text-primary shrink-0" />
                   </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-          <div className="lg:col-span-7 grid grid-cols-2 gap-4 lg:gap-6 pt-10 lg:pt-0">
-            <Parallax speed={0.5} className="rounded-2xl border border-border/50 overflow-hidden shadow-elegant">
-              <img src={podcastStudio} alt="Estúdio de podcast" className="w-full h-64 md:h-96 object-cover scale-110" />
-            </Parallax>
-            <Parallax speed={-0.3} className="rounded-2xl border border-border/50 overflow-hidden shadow-elegant mt-12">
-              <img src={mobileUnit} alt="Unidade móvel de transmissão" className="w-full h-64 md:h-96 object-cover scale-110" />
-            </Parallax>
-            <Parallax speed={0.4} className="rounded-2xl border border-border/50 overflow-hidden shadow-elegant -mt-12">
-              <img src={droneEvent} alt="Drone em evento" className="w-full h-64 md:h-96 object-cover scale-110" />
-            </Parallax>
-            <Parallax speed={-0.4} className="rounded-2xl border border-border/50 overflow-hidden shadow-elegant">
-              <img src={liveEvent} alt="Cobertura ao vivo" className="w-full h-64 md:h-96 object-cover scale-110" />
-            </Parallax>
+                  <span className="text-sm md:text-base font-semibold text-foreground/90 leading-tight">{s.label}</span>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </Section>
 
-      {/* Por que escolher */}
-      <section className="pt-24 border-t border-border overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-12 gap-12">
-            <div className="lg:col-span-5 text-center lg:text-left flex flex-col items-center lg:items-start">
-              <h2 className="text-4xl md:text-5xl font-bold leading-tight">
-                Por que escolher a RTV?
-              </h2>
-            </div>
-            <div className="lg:col-span-7 grid sm:grid-cols-2 gap-3">
-              {reasons.map((r) => (
-                <div key={r} className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
-                  <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                  <span className="font-medium">{r}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        
-        {/* Single Row Gallery - Full Width */}
-        <div className="w-full mt-10 py-6 border-t border-border/30">
-          {galleryImages.length > 0 && <MarqueeRow images={galleryImages.slice(0, 18)} direction="left" speed={70} />}
-        </div>
-      </section>
+      {/* Gallery Carousel - Full Width */}
+      <div className="w-full py-6 pb-24 border-b border-border/30 overflow-hidden">
+        {galleryImages.length > 0 && <MarqueeRow images={galleryImages.slice(0, 18)} direction="left" speed={70} itemClassName="w-80 sm:w-96 md:w-[32rem] lg:w-[40rem] aspect-[16/9]" />}
+      </div>
 
       {/* Segmentos */}
       <Section className="border-t border-border bg-black relative overflow-hidden">
@@ -597,9 +565,10 @@ function Index() {
       </Section>
 
       {/* Programas */}
-      <Section className="border-t border-border">
-        <div className="mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold">Nossos Programas</h2>
+      <Section className="border-t border-border !pt-8 md:!pt-0 !pb-0">
+        <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 justify-center md:justify-start">
+          <h2 className="text-4xl md:text-5xl font-bold text-center md:text-left relative z-10">Já conhece o nosso canal?</h2>
+          <img src={estudiosLogo} alt="Estúdios RTV" className="w-[20rem] sm:w-[24rem] md:w-[28rem] lg:w-[32rem] object-contain drop-shadow-2xl scale-125 md:scale-100 -mt-2 -mb-8 md:-my-12" />
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
           {programs.map((p) => (
@@ -610,21 +579,63 @@ function Index() {
                 <span className="inline-flex self-start text-[10px] uppercase tracking-widest bg-primary/20 text-primary px-2 py-1 rounded-full">{p.tag}</span>
                 <div>
                   <h3 className="text-2xl font-display font-bold leading-tight">{p.title}</h3>
-                  <div className="mt-3 flex items-center gap-1 text-xs text-muted-foreground group-hover:text-primary transition">
+                  <a 
+                    href="https://www.youtube.com/@estudiosrtv/playlists"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex items-center gap-1 text-xs text-muted-foreground group-hover:text-primary transition"
+                  >
                     Assistir <ChevronRight className="w-3 h-3" />
-                  </div>
+                  </a>
                 </div>
               </div>
             </div>
           ))}
         </div>
+        <div className="mt-16 flex flex-col items-center text-center max-w-4xl mx-auto">
+          <p className="text-muted-foreground text-lg md:text-xl mb-8 leading-relaxed">
+            Nosso canal exclusivo, Estúdios RTV, reúne os principais conteúdos produzidos em nossos estúdios, com programas ao vivo, podcasts, jornalismo, esportes e edições especiais. Conteúdo, informação e entretenimento para todas as telas.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-6 mt-2 w-full">
+            <a 
+              href="https://youtube.com/@estudiosrtv?si=xh42LrKdrrHFOp9Q" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex shrink-0 items-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold hover:bg-primary/90 transition-all hover:scale-105"
+            >
+              <Youtube className="w-6 h-6" />
+              Inscreva-se agora
+            </a>
+
+            <div className="flex-1 w-full max-w-[24rem] sm:max-w-[32rem] lg:max-w-[40rem] overflow-hidden relative rounded-xl border border-border/50 bg-black/20 p-2 group">
+              <div className="flex gap-2 animate-marquee-left w-max">
+                {[...["3a_rRiPdto8", "4EhqJS1bD24", "79LuFI2qDr4", "7LoDM_HnUP4", "83-6fod1QP0", "9MLcG1ADuU4", "Cc0810DIlAc", "HPWeOo6WH2g"], ...["3a_rRiPdto8", "4EhqJS1bD24", "79LuFI2qDr4", "7LoDM_HnUP4", "83-6fod1QP0", "9MLcG1ADuU4", "Cc0810DIlAc", "HPWeOo6WH2g"]].map((id, idx) => (
+                  <a 
+                    key={idx} 
+                    href={`https://www.youtube.com/watch?v=${id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-40 h-24 rounded-lg overflow-hidden relative shrink-0 hover:scale-105 transition-transform border border-white/10"
+                  >
+                    <img src={`https://i.ytimg.com/vi/${id}/mqdefault.jpg`} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="YouTube Thumbnail" />
+                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/10 transition-colors">
+                      <Youtube className="w-8 h-8 text-[#FF0000] drop-shadow-md" />
+                    </div>
+                  </a>
+                ))}
+              </div>
+              <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#0a0a0a] to-transparent pointer-events-none" />
+              <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#0a0a0a] to-transparent pointer-events-none" />
+            </div>
+          </div>
+        </div>
       </Section>
 
-      {/* Cases */}
+      {/* Coberturas Especiais */}
       <Section id="cases" className="border-t border-border overflow-hidden pb-16">
         <div className="flex items-end justify-between flex-wrap gap-6 mb-16 text-center w-full">
           <div className="w-full">
-            <h2 className="text-4xl md:text-5xl font-bold">Cases</h2>
+            <h2 className="text-4xl md:text-5xl font-bold">Coberturas Especiais</h2>
           </div>
         </div>
         
@@ -681,85 +692,7 @@ function Index() {
       </Section>
 
       {/* Galeria Completa removida */}
-      {/* Processo */}
-      <Section id="processo" className="border-t border-border">
-        <div className="mb-20 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold">Nosso Processo</h2>
-        </div>
-        <div className="grid md:grid-cols-5 gap-8 relative">
-          <div className="hidden md:block absolute top-7 left-[10%] right-[10%] h-[2px] bg-border overflow-hidden">
-             <motion.div 
-               initial={{ x: "-100%" }}
-               whileInView={{ x: 0 }}
-               transition={{ duration: 1.5, ease: "easeOut" }}
-               viewport={{ once: true, margin: "-10%" }}
-               className="w-full h-full bg-primary shadow-glow" 
-             />
-          </div>
-          {process.map((p, i) => (
-            <Reveal key={p.n} delay={i * 150} className="relative text-center group">
-              <motion.div 
-                whileHover={{ scale: 1.1 }}
-                className="relative z-10 mx-auto w-14 h-14 rounded-full bg-background border-2 border-border group-hover:border-primary transition-colors flex items-center justify-center font-display font-bold text-xl text-muted-foreground group-hover:text-primary mb-6 group-hover:shadow-glow duration-300"
-              >
-                {p.n}
-              </motion.div>
-              <h3 className="font-semibold text-lg mb-3">{p.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
-            </Reveal>
-          ))}
-        </div>
-      </Section>
 
-      {/* Depoimentos */}
-      <section className="pt-24 border-t border-border overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold">Depoimentos</h2>
-        </div>
-        
-        <div className="w-full relative overflow-hidden group/testimonials" style={{ cursor: 'grab' }}>
-          <style>{`
-            @keyframes slide-testimonials {
-              0% { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
-            }
-            .animate-slide-testimonials {
-              animation: slide-testimonials 50s linear infinite;
-            }
-            .group\\/testimonials:hover .animate-slide-testimonials,
-            .group\\/testimonials:active .animate-slide-testimonials {
-              animation-play-state: paused;
-            }
-          `}</style>
-
-          <div className="flex gap-6 px-4 w-max animate-slide-testimonials pb-24">
-            {[...testimonials, ...testimonials].map((t, i) => (
-              <blockquote 
-                key={`${t.name}-${i}`} 
-                className="w-[300px] md:w-[350px] flex-shrink-0 p-6 rounded-3xl bg-card/40 backdrop-blur-sm border border-border/60 hover:border-primary/40 hover:shadow-premium transition-colors flex flex-col justify-between group"
-              >
-                <div>
-                  <div className="text-4xl text-primary font-display leading-none mb-2 opacity-50">“</div>
-                  <p className="text-sm leading-relaxed mb-6 text-foreground/80">{t.quote}</p>
-                </div>
-                <footer className="flex items-center gap-3 pt-5 border-t border-border/50 mt-auto">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary-glow flex items-center justify-center font-display font-bold text-primary-foreground text-xs shadow-glow">
-                    {t.initials}
-                  </div>
-                  <div className="text-xs">
-                    <div className="font-semibold text-foreground">{t.name}</div>
-                    <div className="text-muted-foreground mt-0.5">{t.role}</div>
-                  </div>
-                </footer>
-              </blockquote>
-            ))}
-          </div>
-          
-          {/* Gradient Edges */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
-        </div>
-      </section>
 
       {/* Instagram */}
       <Section className="border-t border-border relative overflow-hidden">
@@ -800,7 +733,7 @@ function Index() {
       <section id="contato" className="border-t border-border relative overflow-hidden">
         <div className="absolute inset-0 bg-radial-glow opacity-60" />
         <div className="max-w-5xl mx-auto px-6 py-32 relative text-center">
-          <Eyebrow>Chamada Final</Eyebrow>
+          <Eyebrow>Pronto para começar?</Eyebrow>
           <h2 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
             Vamos produzir seu <span className="text-gradient">próximo projeto?</span>
           </h2>
@@ -878,9 +811,8 @@ function Index() {
             </div>
           </div>
           <div className="border-t border-border/50">
-            <div className="max-w-7xl mx-auto px-6 py-6 text-xs text-muted-foreground flex flex-wrap justify-between gap-2">
+            <div className="max-w-7xl mx-auto px-6 py-6 text-xs text-muted-foreground flex flex-wrap justify-center text-center">
               <div>© {new Date().getFullYear()} RTV Filmes. Todos os direitos reservados.</div>
-              <div>Impacto Audiovisual. Padrão Broadcast.</div>
             </div>
           </div>
         </Reveal>

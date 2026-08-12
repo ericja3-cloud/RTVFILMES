@@ -16,7 +16,7 @@ export function InfiniteImageGallery({ images }: { images: string[] }) {
   );
 }
 
-export function MarqueeRow({ images, direction, speed }: { images: string[], direction: "left" | "right", speed: number }) {
+export function MarqueeRow({ images, direction, speed, itemClassName }: { images: string[], direction: "left" | "right", speed: number, itemClassName?: string }) {
   if (!images || images.length === 0) return null;
 
   return (
@@ -37,7 +37,7 @@ export function MarqueeRow({ images, direction, speed }: { images: string[], dir
         className={`flex gap-4 px-2 w-max animate-marquee-${direction}`}
       >
          {[...images, ...images].map((img, i) => (
-           <div key={i} className="w-64 sm:w-80 md:w-96 aspect-video flex-shrink-0 rounded-2xl overflow-hidden border border-border/50 bg-black/20 relative transform-gpu">
+           <div key={i} className={`flex-shrink-0 rounded-2xl overflow-hidden border border-border/50 bg-black/20 relative transform-gpu ${itemClassName || 'w-64 sm:w-80 md:w-96 aspect-video'}`}>
              <div className="absolute inset-0 bg-primary/10 opacity-0 hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none" />
              <img src={img} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 will-change-transform" loading="lazy" alt="Gallery frame" />
            </div>
