@@ -11,10 +11,12 @@ import heroVideo from "@/assets/24497-344562750.mp4";
 import { Reveal } from "@/components/Reveal";
 import { Parallax } from "@/components/Parallax";
 import { InfiniteImageGallery, MarqueeRow } from "@/components/ui/infinite-image-gallery";
-
-// Optimize image loading by only extracting their URLs, avoiding base64 inlining in JS bundle
-const framesModules = import.meta.glob('../assets/RTV INST 23-26 FRAMES/*.jpg', { eager: true, query: '?url', import: 'default' });
-const galleryImages = Object.values(framesModules) as string[];
+import useEmblaCarousel from "embla-carousel-react";
+import AutoScroll from "embla-carousel-auto-scroll";
+import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
+import rtvLogo from "@/assets/RTV INST 23-26 FRAMES/rtv-logo.png";
+import estudiosLogo from "@/assets/estudios.png";
+import estruturaBg from "@/assets/IMG_3458.PNG";
 
 import { Spotlight } from "@/components/ui/spotlight";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -22,10 +24,11 @@ import mobileUnit from "@/assets/RTV INST 23-26 FRAMES/Comp RTV FILMES INST60 4K
 import podcastStudio from "@/assets/RTV INST 23-26 FRAMES/Comp RTV FILMES INST60 4K p frames (0-00-33-18).jpg";
 import droneEvent from "@/assets/RTV INST 23-26 FRAMES/Comp RTV FILMES INST60 4K p frames (0-00-43-01).jpg";
 import liveEvent from "@/assets/RTV INST 23-26 FRAMES/Comp RTV FILMES INST60 4K p frames (0-00-56-01).jpg";
-import rtvLogo from "@/assets/rtv-logo.png";
-import estudiosLogo from "@/assets/estudios.png";
-import estruturaBg from "@/assets/IMG_3458.PNG";
-import { useEffect, useRef, useState } from "react";
+
+const framesModules = import.meta.glob('../assets/RTV INST 23-26 FRAMES/*.jpg', { eager: true, query: '?url', import: 'default' });
+const galleryImages = [estruturaBg, ...Object.values(framesModules) as string[]];
+
+import React, { useEffect, useRef, useState } from "react";
 
 const instagramPosts = [
   "C-Gxhw4PmLo",
@@ -44,7 +47,7 @@ export const Route = createFileRoute("/")({
 
 const services = [
   { icon: Video, title: "Produção de Vídeos", desc: "Institucionais, comerciais, campanhas, documentários e vídeos para redes sociais." },
-  { icon: Radio, title: "Transmissões ao Vivo", desc: "Lives corporativas, eventos, podcasts, seminários, esportes e programas ao vivo." },
+  { icon: Radio, title: "Transmissões ao Vivo", desc: "Cobertura das Eleições, eventos, podcasts, seminários, esportes e programas ao vivo." },
   { icon: Mic, title: "Estúdios Profissionais", desc: "Estrutura completa para gravações de podcasts, videocasts, programas de TV e conteúdos digitais." },
   { icon: Tv, title: "Produção para TV", desc: "Produção de programas, reportagens, entrevistas e conteúdos jornalísticos." },
   { icon: Megaphone, title: "Campanha Política", desc: "Especialistas em campanhas eleitorais, mandatos e comunicação pública." },
@@ -84,19 +87,42 @@ const segments = [
 ];
 
 const programs = [
-  { title: "Conexão Alto Tietê", tag: "Programa", img: heroStudio },
-  { title: "Na Área", tag: "Programa", img: mobileUnit },
-  { title: "Podcasts", tag: "Série", img: podcastStudio },
-  { title: "Coberturas Especiais", tag: "Ao Vivo", img: droneEvent },
-  { title: "Lives Corporativas", tag: "Ao Vivo", img: liveEvent },
+  { title: "Conexão Alto Tietê", tag: "Podcast", img: heroStudio, youtubeId: "kyei829xVZI", link: "https://www.youtube.com/watch?v=kyei829xVZI&list=PLVf77GDUaJ2ISKJJtaeFHRACNSSmIgmzm&index=22" },
+  { title: "Na Área", tag: "Programa", img: mobileUnit, youtubeId: "sulnZEL2Xic", link: "https://www.youtube.com/watch?v=sulnZEL2Xic&list=PLVf77GDUaJ2JiV9B6YqHiUvxWdYfi8C44&index=13" },
+  { title: "Live de Sorteios", tag: "Live", img: podcastStudio, youtubeId: "NL2NIUZ6S8Y", link: "https://www.youtube.com/live/NL2NIUZ6S8Y" },
+  { title: "Festa do Divino", tag: "Ao Vivo", img: droneEvent, youtubeId: "AeBv1gAK8Uk", link: "https://www.youtube.com/watch?v=AeBv1gAK8Uk&list=PLVf77GDUaJ2Lyb9t481XC2UFNcqWWZCCG&index=2" },
+  { title: "Cobertura das Eleições", tag: "Ao Vivo", img: liveEvent, youtubeId: "jXHPzbcL4eY", link: "https://www.youtube.com/watch?v=jXHPzbcL4eY&list=PLVf77GDUaJ2ITwK_NUqf9NekSfNFpjIkt&index=12" },
+  { title: "Câmara Municipal de Mogi das Cruzes", tag: "Câmara", img: podcastStudio, youtubeId: "6XrnwiG2UY0", link: "https://www.youtube.com/watch?v=6XrnwiG2UY0&list=PL5-A4XdQWtz3IP87HZbpiI7QhkVuuaGFE" },
+  { title: "Mogi Basquete", tag: "Esportes", img: heroStudio, youtubeId: "W3UnTRni1S4", link: "https://www.youtube.com/watch?v=W3UnTRni1S4" },
+  { title: "Campanhas Políticas", tag: "Política", img: mobileUnit, youtubeId: "bA3JF_cPm0s", link: "https://www.youtube.com/watch?v=bA3JF_cPm0s" },
 ];
 
+import thumbNaArea from "@/assets/THUMBS/THUMB NA ÁREA.png";
+import thumbAgoraEShow from "@/assets/THUMBS/THUMB AGORA É SHOW OK.png";
+import thumbMogiBasquete from "@/assets/THUMBS/THUMB MOGI BASQUETE.png";
+import thumbConexao from "@/assets/THUMBS/conexao auto tietejpg.jpg";
+import thumbPaPum from "@/assets/THUMBS/THUMB PÁ PUM.png";
+import thumbCafe from "@/assets/THUMBS/THUMB CAFÉ COM + SAÚDE.png";
+import thumbEleicoes from "@/assets/THUMBS/THUMB ELEICOES 2026.jpg";
+import thumbEventos from "@/assets/THUMBS/thumb estuidos RTV.png";
+import thumbPadre from "@/assets/THUMBS/THUMB PADRE CLEITON RESPONDE.jpg";
+import thumbSeConecta from "@/assets/THUMBS/THUMB SE CONECTA.jpeg";
+import thumbPodSorrir from "@/assets/THUMBS/THUMB APCD.png";
+import thumbBarufi from "@/assets/THUMBS/THUMB BARUFI.jpeg";
+
 const cases = [
-  { title: "Câmara Municipal de Mogi das Cruzes", desc: "Produção e operação da TV Câmara.", img: liveEvent, tag: "Governo" },
-  { title: "Mogi Basquete", desc: "Transmissões oficiais e produção audiovisual.", img: droneEvent, tag: "Esportes" },
-  { title: "Festa do Divino", desc: "Cobertura ao vivo e transmissão especial.", img: mobileUnit, tag: "Cultura" },
-  { title: "Eventos Corporativos", desc: "", img: podcastStudio, tag: "Corporativo" },
-  { title: "Campanhas Eleitorais", desc: "", img: heroStudio, tag: "Político" },
+  { title: "Na Área", desc: "", img: thumbNaArea, tag: "Programa", link: "https://youtube.com/playlist?list=PLVf77GDUaJ2JiV9B6YqHiUvxWdYfi8C44&si=oAtoFMUyWxwqMjhV" },
+  { title: "Agora é Show", desc: "", img: thumbAgoraEShow, tag: "Programa", link: "https://youtube.com/playlist?list=PLVf77GDUaJ2Ku81oZqjiA5qnmtUGo5apM&si=Vrq-wxAWLXp-LVgQ" },
+  { title: "Mogi Basquete", desc: "", img: thumbMogiBasquete, tag: "Esportes", link: "https://youtube.com/playlist?list=PLVf77GDUaJ2JgzdL51orSXwDSuVjI547X&si=G7EKiwcQweXxUQpJ" },
+  { title: "Conexão Alto Tietê", desc: "", img: thumbConexao, tag: "Podcast", link: "https://youtube.com/playlist?list=PLVf77GDUaJ2ISKJJtaeFHRACNSSmIgmzm&si=uO-0cnTnSQcHJDrm" },
+  { title: "Pá Pum Podcast", desc: "", img: thumbPaPum, tag: "Podcast", link: "https://youtube.com/playlist?list=PLVf77GDUaJ2KY2M-fM2qGxX-E6DXpe4jU&si=M_FNMvD484Chow6L" },
+  { title: "Café com + Saúde", desc: "", img: thumbCafe, tag: "Podcast", link: "https://youtube.com/playlist?list=PLVf77GDUaJ2Ll7e2OvWkSX_jimvqN15NB&si=QudYwGUUisVK52L-" },
+  { title: "Eleições 2026", desc: "", img: thumbEleicoes, tag: "Política", link: "https://youtube.com/playlist?list=PLVf77GDUaJ2ITwK_NUqf9NekSfNFpjIkt&si=vGczSRvEXUgOqCwq" },
+  { title: "Eventos Estúdios RTV", desc: "", img: thumbEventos, tag: "Eventos", link: "https://youtube.com/playlist?list=PLVf77GDUaJ2Lyb9t481XC2UFNcqWWZCCG&si=IkrnsKUsXWZHnyGp" },
+  { title: "Padre Cleiton Responde", desc: "", img: thumbPadre, tag: "Programa", link: "https://youtube.com/playlist?list=PLVf77GDUaJ2IYXN-XPGTcVVnAuJdk3-rl&si=LEQiY9__A6kGkgpx" },
+  { title: "Se Conecta", desc: "", img: thumbSeConecta, tag: "Podcast", link: "https://youtube.com/playlist?list=PLVf77GDUaJ2I47yFy8yEa42hYaGJasno-&si=ImdhCYT2VcuWdZzV" },
+  { title: "Pod Sorrir", desc: "", img: thumbPodSorrir, tag: "Podcast", link: "https://youtube.com/playlist?list=PLVf77GDUaJ2Jy5mpuuvAB9oMrAz75mXL4&si=PH6XBOpNvXs7EE89" },
+  { title: "Barufi Podcast", desc: "", img: thumbBarufi, tag: "Podcast", link: "https://youtube.com/playlist?list=PLVf77GDUaJ2IU_3VkauIj0Aa2BFQgTN0e&si=J0KcFZIlzArwqG4o" },
 ];
 
 const process = [
@@ -177,6 +203,117 @@ const AnimatedNavLink = ({ href, children }: { href: string; children: React.Rea
     </a>
   );
 };
+
+function MiniYoutubeCarousel() {
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, dragFree: true },
+    [AutoScroll({ playOnInit: true, speed: 0.5, stopOnInteraction: false, stopOnMouseEnter: true })]
+  );
+
+  const videos = ["3a_rRiPdto8", "4EhqJS1bD24", "79LuFI2qDr4", "7LoDM_HnUP4", "83-6fod1QP0", "9MLcG1ADuU4", "Cc0810DIlAc", "HPWeOo6WH2g"];
+
+  return (
+    <div className="w-full overflow-hidden relative rounded-xl border border-border/50 bg-black/20 p-3 group cursor-grab active:cursor-grabbing">
+      <div className="overflow-hidden" ref={emblaRef}>
+        <div className="flex gap-3">
+          {[...videos, ...videos, ...videos].map((id, idx) => (
+            <a 
+              key={idx} 
+              href={`https://www.youtube.com/watch?v=${id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                if (emblaApi && !emblaApi.clickAllowed()) e.preventDefault();
+              }}
+              className="w-40 h-24 md:w-44 md:h-24 rounded-lg overflow-hidden relative shrink-0 hover:scale-105 transition-transform border border-white/10"
+            >
+              <img src={`https://i.ytimg.com/vi/${id}/mqdefault.jpg`} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="YouTube Thumbnail" />
+              <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/10 transition-colors">
+                <Youtube className="w-8 h-8 text-[#FF0000] drop-shadow-md" />
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+      <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-[#0a0a0a] to-transparent pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-[#0a0a0a] to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+function CasesCarousel() {
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, dragFree: true },
+    [AutoScroll({ playOnInit: true, speed: 0.8, stopOnInteraction: false, stopOnMouseEnter: true })]
+  );
+
+  const [selectedCase, setSelectedCase] = useState<{img: string, title: string} | null>(null);
+
+  return (
+    <div className="w-full relative mt-10 group">
+      <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
+        <div className="flex gap-6 px-4">
+          {[...cases, ...cases, ...cases].map((c, i) => (
+            <div 
+              key={`${c.title}-${i}`}
+              onClick={() => emblaApi?.clickAllowed() && setSelectedCase({img: c.img, title: c.title})}
+              className="w-[320px] md:w-[500px] flex-shrink-0 flex-grow-0 min-w-0 aspect-video relative group/item rounded-2xl overflow-hidden border border-border bg-card shadow-elegant cursor-pointer transform-gpu"
+            >
+              <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300 z-10 pointer-events-none" />
+              <img 
+                draggable={false}
+                src={c.youtubeId ? `https://i.ytimg.com/vi/${c.youtubeId}/maxresdefault.jpg` : c.img} 
+                alt={c.title} 
+                className="w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 ease-out will-change-transform select-none" 
+                loading="lazy" 
+                onError={(e) => {
+                  if (c.youtubeId && !(e.target as HTMLImageElement).src.includes('hqdefault')) {
+                    (e.target as HTMLImageElement).src = `https://i.ytimg.com/vi/${c.youtubeId}/hqdefault.jpg`;
+                  }
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10 opacity-80 group-hover/item:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              
+              <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 z-20 flex flex-col justify-end translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 ease-out">
+                <span className="inline-flex self-start text-[10px] md:text-xs uppercase tracking-widest bg-primary/20 text-primary px-3 py-1 rounded-full mb-3 backdrop-blur-md border border-primary/20">
+                  {c.tag}
+                </span>
+                <h3 className="text-white text-xl md:text-3xl font-display font-bold leading-tight mb-2 drop-shadow-md">
+                  {c.title}
+                </h3>
+                <p className="text-white/80 text-sm md:text-base opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 delay-100 h-0 group-hover/item:h-auto overflow-hidden">
+                  {c.desc}
+                </p>
+                {c.link && (
+                  <a 
+                    href={c.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="mt-4 opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 delay-150 inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-white"
+                  >
+                    Assistir <ChevronRight className="w-4 h-4" />
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      <Dialog open={!!selectedCase} onOpenChange={(isOpen) => !isOpen && setSelectedCase(null)}>
+        <DialogContent className="max-w-6xl w-[90vw] h-[90vh] p-0 bg-transparent border-none shadow-none flex items-center justify-center z-[100]">
+          <DialogTitle className="sr-only">{selectedCase?.title || "Visualizar Imagem"}</DialogTitle>
+          {selectedCase && <img src={selectedCase.img} className="max-w-full max-h-full object-contain rounded-xl" alt={selectedCase.title} />}
+        </DialogContent>
+      </Dialog>
+      
+      {/* Gradient Edges */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent z-30" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent z-30" />
+    </div>
+  );
+}
 
 function Index() {
   const [showPreloader, setShowPreloader] = useState(true);
@@ -275,8 +412,6 @@ function Index() {
               ["#quem-somos", "Quem somos"],
               ["#servicos", "Serviços"],
               ["#estrutura", "Estrutura"],
-              ["#cases", "Cases"],
-              ["#processo", "Processo"],
               ["#contato", "Contato"],
             ].map(([href, label]) => (
               <AnimatedNavLink key={href} href={href}>
@@ -315,8 +450,6 @@ function Index() {
               ["#quem-somos", "Quem somos"],
               ["#servicos", "Serviços"],
               ["#estrutura", "Estrutura"],
-              ["#cases", "Cases"],
-              ["#processo", "Processo"],
               ["#contato", "Contato"],
             ].map(([href, label]) => (
               <a key={href} href={href} onClick={toggleMenu} className="text-muted-foreground hover:text-foreground transition-colors w-full text-center">
@@ -528,7 +661,7 @@ function Index() {
 
       {/* Gallery Carousel - Full Width */}
       <div className="w-full py-6 pb-24 border-b border-border/30 overflow-hidden">
-        {galleryImages.length > 0 && <MarqueeRow images={galleryImages.slice(0, 18)} direction="left" speed={70} itemClassName="w-80 sm:w-96 md:w-[32rem] lg:w-[40rem] aspect-[16/9]" />}
+        {galleryImages.length > 0 && <MarqueeRow images={galleryImages.slice(0, 18)} direction="forward" speed={0.6} itemClassName="w-80 sm:w-96 md:w-[32rem] lg:w-[40rem] aspect-[16/9]" />}
       </div>
 
       {/* Segmentos */}
@@ -568,128 +701,44 @@ function Index() {
       <Section className="border-t border-border !pt-8 md:!pt-0 !pb-0">
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 justify-center md:justify-start">
           <h2 className="text-4xl md:text-5xl font-bold text-center md:text-left relative z-10">Já conhece o nosso canal?</h2>
-          <img src={estudiosLogo} alt="Estúdios RTV" className="w-[20rem] sm:w-[24rem] md:w-[28rem] lg:w-[32rem] object-contain drop-shadow-2xl scale-125 md:scale-100 -mt-2 -mb-8 md:-my-12" />
+          <img src={estudiosLogo} alt="Estúdios RTV" className="w-[28rem] sm:w-[36rem] md:w-[48rem] lg:w-[56rem] object-contain drop-shadow-2xl scale-125 md:scale-110 -mt-2 -mb-8 md:-my-12" />
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
-          {programs.map((p) => (
-            <div key={p.title} className="group relative aspect-[4/5] rounded-xl overflow-hidden border border-border">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/40 via-background to-background" />
-              <img src={p.img || heroStudio} alt="" aria-hidden loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-25 group-hover:opacity-40 transition" />
-              <div className="relative h-full p-6 flex flex-col justify-between">
-                <span className="inline-flex self-start text-[10px] uppercase tracking-widest bg-primary/20 text-primary px-2 py-1 rounded-full">{p.tag}</span>
-                <div>
-                  <h3 className="text-2xl font-display font-bold leading-tight">{p.title}</h3>
-                  <a 
-                    href="https://www.youtube.com/@estudiosrtv/playlists"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-3 inline-flex items-center gap-1 text-xs text-muted-foreground group-hover:text-primary transition"
-                  >
-                    Assistir <ChevronRight className="w-3 h-3" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="mt-16 flex flex-col items-center text-center max-w-4xl mx-auto">
-          <p className="text-muted-foreground text-lg md:text-xl mb-8 leading-relaxed">
-            Nosso canal exclusivo, Estúdios RTV, reúne os principais conteúdos produzidos em nossos estúdios, com programas ao vivo, podcasts, jornalismo, esportes e edições especiais. Conteúdo, informação e entretenimento para todas as telas.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center gap-6 mt-2 w-full">
-            <a 
-              href="https://youtube.com/@estudiosrtv?si=xh42LrKdrrHFOp9Q" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex shrink-0 items-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold hover:bg-primary/90 transition-all hover:scale-105"
-            >
-              <Youtube className="w-6 h-6" />
-              Inscreva-se agora
-            </a>
 
-            <div className="flex-1 w-full max-w-[24rem] sm:max-w-[32rem] lg:max-w-[40rem] overflow-hidden relative rounded-xl border border-border/50 bg-black/20 p-2 group">
-              <div className="flex gap-2 animate-marquee-left w-max">
-                {[...["3a_rRiPdto8", "4EhqJS1bD24", "79LuFI2qDr4", "7LoDM_HnUP4", "83-6fod1QP0", "9MLcG1ADuU4", "Cc0810DIlAc", "HPWeOo6WH2g"], ...["3a_rRiPdto8", "4EhqJS1bD24", "79LuFI2qDr4", "7LoDM_HnUP4", "83-6fod1QP0", "9MLcG1ADuU4", "Cc0810DIlAc", "HPWeOo6WH2g"]].map((id, idx) => (
-                  <a 
-                    key={idx} 
-                    href={`https://www.youtube.com/watch?v=${id}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-40 h-24 rounded-lg overflow-hidden relative shrink-0 hover:scale-105 transition-transform border border-white/10"
-                  >
-                    <img src={`https://i.ytimg.com/vi/${id}/mqdefault.jpg`} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="YouTube Thumbnail" />
-                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/10 transition-colors">
-                      <Youtube className="w-8 h-8 text-[#FF0000] drop-shadow-md" />
-                    </div>
-                  </a>
-                ))}
-              </div>
-              <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#0a0a0a] to-transparent pointer-events-none" />
-              <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#0a0a0a] to-transparent pointer-events-none" />
-            </div>
+        <div className="-mt-12 md:-mt-20 flex flex-col items-center mx-auto relative z-20 w-full">
+          <div className="max-w-4xl text-muted-foreground text-lg md:text-xl mb-12 leading-relaxed space-y-4 text-justify px-6 md:px-0">
+            <p>
+              Além dos conteúdos desenvolvidos especialmente para nossos clientes, grande parte das produções realizadas pela RTV também ganha espaço no Estúdios RTV, nosso canal exclusivo.
+            </p>
+            <p>
+              Por lá, reunimos programas ao vivo, podcasts, jornalismo, esportes e edições especiais, levando conteúdo, informação e entretenimento para todas as telas.
+            </p>
           </div>
         </div>
       </Section>
 
-      {/* Coberturas Especiais */}
-      <Section id="cases" className="border-t border-border overflow-hidden pb-16">
-        <div className="flex items-end justify-between flex-wrap gap-6 mb-16 text-center w-full">
-          <div className="w-full">
-            <h2 className="text-4xl md:text-5xl font-bold">Coberturas Especiais</h2>
+      {/* Carousel movido da seção de baixo e Botão */}
+      <div className="w-full relative mb-12 -mt-10 overflow-hidden">
+        <div className="w-full px-6 mb-12 mt-4">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-center md:text-left">Programas do canal</h2>
           </div>
         </div>
-        
-        {/* Marquee Carousel */}
-        <div className="w-full relative mt-10 overflow-hidden group/marquee" style={{ cursor: 'grab' }}>
-          <style>{`
-            @keyframes slide-cases {
-              0% { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
-            }
-            .animate-slide-cases {
-              animation: slide-cases 40s linear infinite;
-            }
-            .group\\/marquee:hover .animate-slide-cases,
-            .group\\/marquee:active .animate-slide-cases {
-              animation-play-state: paused;
-            }
-          `}</style>
-          
-          <div className="flex gap-6 px-4 w-max animate-slide-cases">
-            {[...cases, ...cases].map((c, i) => (
-              <div 
-                key={`${c.title}-${i}`} 
-                className="w-[320px] md:w-[500px] aspect-[4/3] flex-shrink-0 relative group rounded-2xl overflow-hidden border border-border bg-card shadow-elegant"
-              >
-                <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none" />
-                <img 
-                  src={c.img} 
-                  alt={c.title} 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out will-change-transform" 
-                  loading="lazy" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10 opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 z-20 flex flex-col justify-end translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                  <span className="inline-flex self-start text-[10px] md:text-xs uppercase tracking-widest bg-primary/20 text-primary px-3 py-1 rounded-full mb-3 backdrop-blur-md border border-primary/20">
-                    {c.tag}
-                  </span>
-                  <h3 className="text-white text-xl md:text-3xl font-display font-bold leading-tight mb-2 drop-shadow-md">
-                    {c.title}
-                  </h3>
-                  <p className="text-white/80 text-sm md:text-base opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 h-0 group-hover:h-auto overflow-hidden">
-                    {c.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="w-full relative mb-12">
+          <CasesCarousel />
+        </div>
 
-          {/* Gradient Edges */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent z-30" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent z-30" />
+        <div className="flex justify-center mt-4 mb-16 w-full">
+          <a 
+            href="https://youtube.com/@estudiosrtv?si=xh42LrKdrrHFOp9Q" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex shrink-0 items-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold hover:bg-primary/90 transition-all hover:scale-105 shadow-glow"
+          >
+            <Youtube className="w-6 h-6" />
+            Inscreva-se agora
+          </a>
         </div>
-      </Section>
+      </div>
 
       {/* Galeria Completa removida */}
 
@@ -804,7 +853,7 @@ function Index() {
               <h4 className="text-sm font-semibold mb-4 text-foreground">Redes</h4>
               <div className="flex gap-2">
                 <motion.a whileHover={{ scale: 1.1, y: -2 }} href="https://www.instagram.com/rtvfilmes/?hl=pt-br" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-10 h-10 rounded-full border border-border/50 bg-card flex items-center justify-center hover:border-primary hover:text-primary hover:shadow-glow transition-all"><Instagram className="w-4 h-4" /></motion.a>
-                <motion.a whileHover={{ scale: 1.1, y: -2 }} href="https://www.youtube.com/user/RTVFilmes" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="w-10 h-10 rounded-full border border-border/50 bg-card flex items-center justify-center hover:border-primary hover:text-primary hover:shadow-glow transition-all"><Youtube className="w-4 h-4" /></motion.a>
+                <motion.a whileHover={{ scale: 1.1, y: -2 }} href="https://www.youtube.com/@estudiosrtv" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="w-10 h-10 rounded-full border border-border/50 bg-card flex items-center justify-center hover:border-primary hover:text-primary hover:shadow-glow transition-all"><Youtube className="w-4 h-4" /></motion.a>
                 <motion.a whileHover={{ scale: 1.1, y: -2 }} href="https://pt-br.facebook.com/rtvfilmesprodutora/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-10 h-10 rounded-full border border-border/50 bg-card flex items-center justify-center hover:border-primary hover:text-primary hover:shadow-glow transition-all"><Facebook className="w-4 h-4" /></motion.a>
               </div>
               <a href="#" className="block mt-6 text-xs text-muted-foreground hover:text-foreground transition-colors">Política de Privacidade</a>
